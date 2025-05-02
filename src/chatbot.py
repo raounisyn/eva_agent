@@ -2,7 +2,7 @@ from typing import List, Dict, Any
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_community.chat_models import ChatOllama
+from langchain_community.llms import HuggingFaceEndpoint
 from dotenv import load_dotenv
 from tools.improvement_advisor import ImprovementAdvisorTool
 from tools.general import GeneralTool
@@ -13,8 +13,11 @@ load_dotenv()
 
 class Chatbot:
     def __init__(self):
-        # Initialize the language model with Nemotron
-        self.llm = ChatOllama(model="nemotron")
+        # Initialize the language model with Hugging Face Inference API
+        self.llm = HuggingFaceEndpoint(
+            repo_id="meta-llama/Llama-2-70b-chat-hf",  # You can change to another supported model
+            huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
+        )
         
         # Initialize tools
         self.tools = {
@@ -117,7 +120,7 @@ You are my all-in-one strategic partner. Provide a blend of radical innovation a
 if __name__ == "__main__":
     # Example usage
     chatbot = Chatbot()
-    print("Chatbot initialized with Nemotron model. Type 'quit', 'exit', or 'bye' to end the conversation.")
+    print("Chatbot initialized with Hugging Face Inference API. Type 'quit', 'exit', or 'bye' to end the conversation.")
     while True:
         user_input = input("You: ")
         if user_input.lower() in ["quit", "exit", "bye"]:
