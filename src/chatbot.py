@@ -15,7 +15,7 @@ class Chatbot:
     def __init__(self):
         # Initialize the language model with Hugging Face Inference API
         self.llm = HuggingFaceEndpoint(
-            repo_id="meta-llama/Llama-2-70b-hf",  # Switched to text-generation model
+            repo_id="mistralai/Mistral-7B-Instruct-v0.2",
             huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
         )
         
