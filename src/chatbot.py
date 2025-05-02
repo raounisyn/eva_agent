@@ -15,7 +15,7 @@ class Chatbot:
     def __init__(self):
         # Initialize the language model with Hugging Face Inference API
         self.llm = HuggingFaceEndpoint(
-            repo_id="google/flan-t5-large",
+            repo_id="bigscience/bloomz-560m",
             huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
         )
         
